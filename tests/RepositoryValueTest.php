@@ -44,8 +44,8 @@ class RepositoryValueTest extends TestCase
         $value = new RepositoryValue([
             RepositoryValue::FIELD__REPOSITORY_NAME => 'pluginRepository',
             RepositoryValue::FIELD__METHOD => 'all',
-            RepositoryValue::FIELD__QUERY => ['name' => '@value'],
-            RepositoryValue::FIELD__REPLACES => ['@value' => 'test']
+            RepositoryValue::FIELD__QUERY => ['class' => '@value'],
+            RepositoryValue::FIELD__REPLACES => ['value' => 'test']
         ]);
 
         $this->pluginRepository->create(new Plugin([Plugin::FIELD__CLASS => 'test']));
