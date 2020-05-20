@@ -57,7 +57,7 @@ class RepositoryValueTest extends TestCase
 
         $value->setField('class');
         $fields = $value->buildValue();
-        $this->assertCount(1, $plugins);
+        $this->assertCount(1, $fields);
         $pluginClass = array_shift($fields);
         $this->assertEquals('test', $pluginClass);
 
