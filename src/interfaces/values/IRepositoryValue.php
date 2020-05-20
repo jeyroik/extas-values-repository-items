@@ -18,6 +18,7 @@ interface IRepositoryValue extends IItem
     public const FIELD__METHOD = 'method';
     public const FIELD__QUERY = 'query';
     public const FIELD__REPLACES = 'replaces';
+    public const FIELD__FIELD = 'field';
 
     /**
      * @return mixed
@@ -28,6 +29,11 @@ interface IRepositoryValue extends IItem
      * @return bool
      */
     public function isValid(): bool;
+
+    /**
+     * @return string
+     */
+    public function getField(): string;
 
     /**
      * @return string
@@ -48,6 +54,12 @@ interface IRepositoryValue extends IItem
      * @return array
      */
     public function getReplaces(): array;
+
+    /**
+     * @param string $field
+     * @return IRepositoryValue
+     */
+    public function setField(string $field): IRepositoryValue;
 
     /**
      * @param string $name

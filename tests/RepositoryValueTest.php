@@ -45,15 +45,18 @@ class RepositoryValueTest extends TestCase
             RepositoryValue::FIELD__REPOSITORY_NAME => 'pluginRepository',
             RepositoryValue::FIELD__METHOD => 'all',
             RepositoryValue::FIELD__QUERY => ['class' => '@value'],
-            RepositoryValue::FIELD__REPLACES => ['value' => 'test']
+            RepositoryValue::FIELD__REPLACES => ['value' => 'test'],
+            RepositoryValue::FIELD__FIELD => 'class'
         ]);
 
         $this->pluginRepository->create(new Plugin([Plugin::FIELD__CLASS => 'test']));
 
         $fields = $value->buildValue();
         $this->assertCount(1, $fields);
+        $pluginClass = array_shift($fields);
+        $this->assertEquals('test', $pluginClass);
 
-        $value->setMethod('one')->setRepositoryName('')->setQuery([])->setReplaces([]);
+        $value->setMethod('one')->setRepositoryName('')->setQuery([])->setReplaces([])->setField('stage');
         $this->expectExceptionMessage('Invalid fields values');
         $value->buildValue();
     }

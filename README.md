@@ -18,7 +18,8 @@
       "value": {
         "repository": "pluginRepository",
         "method": "all",
-        "query": {"class": "test"}
+        "query": {"class": "test"},
+        "field": ""
       }    
     }
   ]

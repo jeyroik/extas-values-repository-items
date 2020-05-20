@@ -28,7 +28,13 @@ class RepositoryValue extends Item implements IRepositoryValue
         $method = $this->getMethod();
         $query = Replace::please()->apply($this->getReplaces())->to($this->getQuery());
 
-        return $repo->$method($query);
+        $values = $repo->$method($query);
+
+        if ($field = $this->getField()) {
+            return array_column($values, $field);
+        }
+
+        return $values;
     }
 
     /**
@@ -37,6 +43,14 @@ class RepositoryValue extends Item implements IRepositoryValue
     public function isValid(): bool
     {
         return $this->getRepo() && $this->getMethod();
+    }
+
+    /**
+     * @return string
+     */
+    public function getField(): string
+    {
+        return $this->config[static::FIELD__FIELD] ?? '';
     }
 
     /**
@@ -69,6 +83,17 @@ class RepositoryValue extends Item implements IRepositoryValue
     public function getReplaces(): array
     {
         return $this->config[static::FIELD__REPLACES] ?? [];
+    }
+
+    /**
+     * @param string $field
+     * @return $this|IRepositoryValue
+     */
+    public function setField(string $field): IRepositoryValue
+    {
+        $this->config[static::FIELD__FIELD] = $field;
+
+        return $this;
     }
 
     /**
