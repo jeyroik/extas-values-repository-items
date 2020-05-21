@@ -12,8 +12,6 @@ use extas\interfaces\IItem;
  */
 interface IRepositoryValue extends IValueDispatcher
 {
-    public const SUBJECT = 'extas.value';
-
     public const FIELD__REPOSITORY_NAME = 'repository';
     public const FIELD__METHOD = 'method';
     public const FIELD__QUERY = 'query';

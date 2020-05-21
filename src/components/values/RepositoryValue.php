@@ -160,6 +160,6 @@ class RepositoryValue extends ValueDispatcher implements IRepositoryValue
      */
     protected function getSubjectForExtension(): string
     {
-        return static::SUBJECT;
+        return 'extas.value.repository.items';
     }
 }
