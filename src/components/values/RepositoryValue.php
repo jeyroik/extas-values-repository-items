@@ -1,7 +1,6 @@
 <?php
 namespace extas\components\values;
 
-use extas\components\Item;
 use extas\components\Replace;
 use extas\interfaces\repositories\IRepository;
 use extas\interfaces\values\IRepositoryValue;
@@ -12,7 +11,7 @@ use extas\interfaces\values\IRepositoryValue;
  * @package extas\components\values
  * @author jeyroik <jeyroik@gmail.com>
  */
-class RepositoryValue extends Item implements IRepositoryValue
+class RepositoryValue extends ValueDispatcher implements IRepositoryValue
 {
     /**
      * @return mixed
@@ -161,6 +160,6 @@ class RepositoryValue extends Item implements IRepositoryValue
      */
     protected function getSubjectForExtension(): string
     {
-        return static::SUBJECT;
+        return 'extas.value.repository.items';
     }
 }
