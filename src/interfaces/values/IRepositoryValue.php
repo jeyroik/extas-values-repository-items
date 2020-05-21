@@ -10,7 +10,7 @@ use extas\interfaces\IItem;
  * @package extas\interfaces\values
  * @author jeyroik <jeyroik@gmail.com>
  */
-interface IRepositoryValue extends IItem
+interface IRepositoryValue extends IValueDispatcher
 {
     public const SUBJECT = 'extas.value';
 
@@ -19,16 +19,6 @@ interface IRepositoryValue extends IItem
     public const FIELD__QUERY = 'query';
     public const FIELD__REPLACES = 'replaces';
     public const FIELD__FIELD = 'field';
-
-    /**
-     * @return mixed
-     */
-    public function buildValue();
-
-    /**
-     * @return bool
-     */
-    public function isValid(): bool;
 
     /**
      * @return string

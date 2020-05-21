@@ -1,0 +1,11 @@
+{
+  "name": "extas/values-repository-items",
+  "values": [
+    {
+      "name": "repository_items",
+      "title": "Repository items",
+      "description": "Allow ot extract repository items",
+      "class": "extas\\components\\values\\RepositoryValue"
+    }
+  ]
+}
