@@ -28,6 +28,6 @@
 ```php
 $repoValue = new \extas\components\values\RepositoryValue($item->getValue());
 if ($repoValue->isValid()) {
-    $values = $repoValue->buildValue();
+    $values = $repoValue->build();
 }
 ```

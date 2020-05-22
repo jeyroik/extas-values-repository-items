@@ -14,22 +14,23 @@ use extas\interfaces\values\IRepositoryValue;
 class RepositoryValue extends ValueDispatcher implements IRepositoryValue
 {
     /**
-     * @return mixed
+     * @param mixed $value
+     * @return array|mixed
      * @throws \Exception
      */
-    public function buildValue()
+    public function build($value)
     {
-        if (!$this->isValid()) {
+        if (!$this->isValid($value)) {
             throw new \Exception('Invalid fields values');
         }
 
-        $repo = $this->getRepo();
-        $method = $this->getMethod();
-        $query = Replace::please()->apply($this->getReplaces())->to($this->getQuery());
+        $repo = $this->getRepo($value);
+        $method = $this->getMethod($value);
+        $query = Replace::please()->apply($this->getReplaces())->to($this->getQuery($value));
 
         $values = $repo->$method($query);
 
-        if ($field = $this->getField()) {
+        if ($field = $this->getField($value)) {
             return array_column($values, $field);
         }
 
@@ -37,95 +38,57 @@ class RepositoryValue extends ValueDispatcher implements IRepositoryValue
     }
 
     /**
+     * @param mixed $value
      * @return bool
      */
-    public function isValid(): bool
+    public function isValid($value): bool
     {
-        return $this->getRepo() && $this->getMethod();
+        return is_array($value) && $this->getRepo($value) && $this->getMethod($value);
     }
 
     /**
+     * @param array $value
      * @return string
      */
-    public function getField(): string
+    public function getField(array $value): string
     {
-        return $this->config[static::FIELD__FIELD] ?? '';
+        return $value[static::FIELD__FIELD] ?? '';
     }
 
     /**
+     * @param array $value
      * @return string
      */
-    public function getRepositoryName(): string
+    public function getRepositoryName(array $value): string
     {
-        return $this->config[static::FIELD__REPOSITORY_NAME] ?? '';
+        return $value[static::FIELD__REPOSITORY_NAME] ?? '';
     }
 
     /**
+     * @param array $value
      * @return string
      */
-    public function getMethod(): string
+    public function getMethod(array $value): string
     {
-        return $this->config[static::FIELD__METHOD] ?? '';
+        return $value[static::FIELD__METHOD] ?? '';
     }
 
     /**
+     * @param array $value
      * @return array
      */
-    public function getQuery(): array
+    public function getQuery(array $value): array
     {
-        return $this->config[static::FIELD__QUERY] ?? [];
+        return $value[static::FIELD__QUERY] ?? [];
     }
 
     /**
-     * @param string $field
-     * @return $this|IRepositoryValue
-     */
-    public function setField(string $field): IRepositoryValue
-    {
-        $this->config[static::FIELD__FIELD] = $field;
-
-        return $this;
-    }
-
-    /**
-     * @param string $name
-     * @return $this|IRepositoryValue
-     */
-    public function setRepositoryName(string $name): IRepositoryValue
-    {
-        $this->config[static::FIELD__REPOSITORY_NAME] = $name;
-
-        return $this;
-    }
-
-    /**
-     * @param string $name
-     * @return $this|IRepositoryValue
-     */
-    public function setMethod(string $name): IRepositoryValue
-    {
-        $this->config[static::FIELD__METHOD] = $name;
-
-        return $this;
-    }
-
-    /**
-     * @param array $query
-     * @return $this|IRepositoryValue
-     */
-    public function setQuery(array $query): IRepositoryValue
-    {
-        $this->config[static::FIELD__QUERY] = $query;
-
-        return $this;
-    }
-
-    /**
+     * @param array $value
      * @return IRepository|null
      */
-    protected function getRepo(): ?IRepository
+    protected function getRepo(array $value): ?IRepository
     {
-        $repoName = $this->getRepositoryName();
+        $repoName = $this->getRepositoryName($value);
 
         try {
             $repo = $this->$repoName();
