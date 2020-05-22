@@ -26,8 +26,8 @@
 }
 ```
 ```php
-$repoValue = new \extas\components\values\RepositoryValue($item->getValue());
-if ($repoValue->isValid()) {
-    $values = $repoValue->build();
+$repoValue = new \extas\components\values\RepositoryValue($item->__toArray());
+if ($repoValue->isValid($item->getValue)) {
+    $values = $repoValue->build($item->getValue());
 }
 ```
