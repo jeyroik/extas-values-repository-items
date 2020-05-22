@@ -61,7 +61,7 @@ class RepositoryValueTest extends TestCase
         $pluginClass = array_shift($fields);
         $this->assertEquals('test', $pluginClass);
 
-        $value->setMethod('one')->setRepositoryName('')->setQuery([])->setReplaces([]);
+        $value->setMethod('one')->setRepositoryName('')->setQuery([]);
         $this->expectExceptionMessage('Invalid fields values');
         $value->buildValue();
     }
