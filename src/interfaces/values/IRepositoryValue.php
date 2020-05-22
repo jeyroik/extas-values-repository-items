@@ -1,9 +1,6 @@
 <?php
 namespace extas\interfaces\values;
 
-use extas\interfaces\IHasValue;
-use extas\interfaces\IItem;
-
 /**
  * Interface IRepositoryValue
  *
@@ -15,7 +12,6 @@ interface IRepositoryValue extends IValueDispatcher
     public const FIELD__REPOSITORY_NAME = 'repository';
     public const FIELD__METHOD = 'method';
     public const FIELD__QUERY = 'query';
-    public const FIELD__REPLACES = 'replaces';
     public const FIELD__FIELD = 'field';
 
     /**
@@ -37,11 +33,6 @@ interface IRepositoryValue extends IValueDispatcher
      * @return array
      */
     public function getQuery(): array;
-
-    /**
-     * @return array
-     */
-    public function getReplaces(): array;
 
     /**
      * @param string $field
@@ -66,10 +57,4 @@ interface IRepositoryValue extends IValueDispatcher
      * @return $this
      */
     public function setQuery(array $query): IRepositoryValue;
-
-    /**
-     * @param array $replaces
-     * @return $this
-     */
-    public function setReplaces(array $replaces): IRepositoryValue;
 }

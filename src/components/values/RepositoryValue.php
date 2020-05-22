@@ -77,14 +77,6 @@ class RepositoryValue extends ValueDispatcher implements IRepositoryValue
     }
 
     /**
-     * @return array
-     */
-    public function getReplaces(): array
-    {
-        return $this->config[static::FIELD__REPLACES] ?? [];
-    }
-
-    /**
      * @param string $field
      * @return $this|IRepositoryValue
      */
@@ -124,17 +116,6 @@ class RepositoryValue extends ValueDispatcher implements IRepositoryValue
     public function setQuery(array $query): IRepositoryValue
     {
         $this->config[static::FIELD__QUERY] = $query;
-
-        return $this;
-    }
-
-    /**
-     * @param array $replaces
-     * @return $this|IRepositoryValue
-     */
-    public function setReplaces(array $replaces): IRepositoryValue
-    {
-        $this->config[static::FIELD__REPLACES] = $replaces;
 
         return $this;
     }
